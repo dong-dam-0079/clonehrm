@@ -1,5 +1,5 @@
-import 'package:clonehrm/screen/request_screen.dart';
-import 'package:clonehrm/screen/timesheet_screen.dart';
+import 'package:clonehrm/widgets/request_tab.dart';
+import 'package:clonehrm/widgets/timesheet_tab.dart';
 import 'package:flutter/material.dart';
 
 class TabScreen extends StatefulWidget {
@@ -18,37 +18,49 @@ class _TabScreenState extends State<TabScreen> {
           body: SafeArea(
               child: Padding(
             padding: const EdgeInsets.only(
-              left: 0.0,
-              top: 10.0,
-              bottom: 15.0,
-              right: 0.0,
-            ),
+                left: 0.0, top: 10.0, bottom: 5.0, right: 0.0),
             child: Column(
               children: [
-                Container(
-                    height: 40,
-                    margin: const EdgeInsets.symmetric(horizontal: 60),
-                    padding: const EdgeInsets.all(3),
-                    decoration: BoxDecoration(
-                        color: const Color(-1261515058),
-                        borderRadius: BorderRadius.circular(15)),
-                    child: TabBar(
-                      indicator: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15)),
-                      labelColor: Colors.black,
-                      unselectedLabelColor: Colors.grey,
-                      tabs: const [
-                        Tab(text: 'Timesheet'),
-                        Tab(text: 'Request')
+                Expanded(
+                    flex: 2,
+                    child: Column(
+                      children: [
+                        Expanded(
+                            flex: 2,
+                            child: Container(
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 90),
+                                padding: const EdgeInsets.all(2),
+                                decoration: BoxDecoration(
+                                    color: const Color(-1261515058),
+                                    borderRadius: BorderRadius.circular(15)),
+                                child: TabBar(
+                                  indicator: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(15)),
+                                  labelColor: Colors.black,
+                                  unselectedLabelColor: Colors.grey,
+                                  tabs: const [
+                                    Tab(text: 'Timesheet'),
+                                    Tab(text: 'Request')
+                                  ],
+                                ))),
+                        const Expanded(
+                            flex: 1,
+                            child: Divider(color: Colors.grey, height: 10))
                       ],
                     )),
-                Container(
-                  height: 400,
-                  color: Colors.black,
-                  child: TabBarView(
-                      children: <Widget>[TimeSheetScreen(), RequestScreen()]),
-                )
+                Expanded(
+                    flex: 20,
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 10),
+                      child: const TabBarView(
+                          physics: NeverScrollableScrollPhysics(),
+                          children: <Widget>[
+                            TimeSheetScreen(),
+                            RequestScreen()
+                          ]),
+                    ))
               ],
             ),
           )),
