@@ -1,4 +1,5 @@
 import 'package:clonehrm/widgets/date_picker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TimeSheetScreen extends StatefulWidget {
@@ -9,6 +10,8 @@ class TimeSheetScreen extends StatefulWidget {
 }
 
 class _TimeSheetScreenState extends State<TimeSheetScreen> {
+  bool isSelected = true;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -115,15 +118,16 @@ class _TimeSheetScreenState extends State<TimeSheetScreen> {
               ],
             ),
             Container(
-                margin: const EdgeInsets.only(top: 10),
-                height: 35,
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,children: [
+                margin: const EdgeInsets.only(top: 30),
+                child:
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Container(
+                      width: 130,
+                      height: 32,
                       margin: const EdgeInsets.symmetric(horizontal: 20),
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: const Color(-16706956)),
+                          borderRadius: BorderRadius.circular(10),
+                          color: const Color(0xFF010531)),
                       child: const TextButton(
                           onPressed: null,
                           child: Text(
@@ -131,17 +135,37 @@ class _TimeSheetScreenState extends State<TimeSheetScreen> {
                             style: TextStyle(color: Colors.white),
                           ))),
                   Container(
+                      width: 130,
+                      height: 32,
                       margin: const EdgeInsets.symmetric(horizontal: 20),
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: const Color(-16706956)),
+                          borderRadius: BorderRadius.circular(10),
+                          color: const Color(0xFF010531)),
                       child: const TextButton(
                           onPressed: null,
                           child: Text(
                             "Monthly",
                             style: TextStyle(color: Colors.white),
                           ))),
-                ]))
+                ])),
+            Container(
+              margin: const EdgeInsets.only(top: 30, left: 20, right: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Icon(Icons.arrow_left),
+                  Text(
+                    '24/05/2021 ~ 30/05/2021',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Color(0xFF010531),
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Icon(Icons.arrow_right)
+                ],
+              ),
+            )
           ],
         )));
   }
