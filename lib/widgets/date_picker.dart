@@ -1,6 +1,7 @@
-import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:scroll_date_picker/scroll_date_picker.dart';
+
+import '../utils/constant.dart';
 
 class DatePicker extends StatefulWidget {
   const DatePicker({Key? key}) : super(key: key);
@@ -11,7 +12,8 @@ class DatePicker extends StatefulWidget {
 
 class _DatePickerState extends State<DatePicker> {
   DateTime currentDate = DateTime.now();
-  DateTime? pickedDate = null;
+  DateTime? pickedDate;
+  bool isClickPickedDate = true;
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +26,18 @@ class _DatePickerState extends State<DatePicker> {
               color: const Color(-1261515058),
               borderRadius: BorderRadius.circular(15)),
           child: TextButton(
-            onPressed: () => showDialogDatePicker(),
+            onPressed: () {
+              setState(() {
+                isClickPickedDate = false;
+              });
+              showDialogDatePicker();
+            },
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               Text(
                 '${currentDate.month}/${currentDate.year}',
                 style: const TextStyle(color: Colors.black, fontSize: 17),
               ),
-              const Icon(Icons.arrow_drop_down)
+              Icon(isClickPickedDate ? Icons.arrow_right : Icons.arrow_drop_down, color: Colors.black)
             ]),
           ),
         ),
@@ -53,22 +60,24 @@ class _DatePickerState extends State<DatePicker> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextButton(
-                        onPressed: () => Navigator.pop(context),
+                        onPressed: () {
+                          setState(() {
+                            isClickPickedDate = true;
+                          });
+                          Navigator.pop(context);
+                        },
                         child: const Text('Cancel',
-                            style: TextStyle(
-                                backgroundColor: Colors.transparent,
-                                color: Colors.black))),
+                            style: kTransparentText)),
                     TextButton(
                         onPressed: () => {
                               setState(() {
+                                isClickPickedDate = true;
                                 currentDate = pickedDate!;
                               }),
                               Navigator.pop(context)
                             },
                         child: const Text('Select',
-                            style: TextStyle(
-                                backgroundColor: Colors.transparent,
-                                color: Colors.black))),
+                            style: kTransparentText)),
                   ],
                 ),
                 const Divider(color: Colors.grey, height: 10),
